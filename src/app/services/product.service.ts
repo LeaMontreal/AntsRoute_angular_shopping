@@ -22,6 +22,18 @@ export class ProductService {
 
     // console.log(searchUrl);
 
+    return this.getProducts(searchUrl);
+  }
+
+  searchProducts(theKeyword: string): Observable<Product[]> {
+    const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`;
+
+    return this.getProducts(searchUrl);
+  }
+
+  private getProducts(searchUrl: string): Observable<Product[]> {
+    // return an observable
+    // map the JSON data to Product array
     return this.httpClient
       .get<GetResponse>(searchUrl)
       .pipe(map((response) => response._embedded.products));
