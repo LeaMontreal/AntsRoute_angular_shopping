@@ -1,13 +1,14 @@
 export class Product {
-  constructor(
-    public sku: string,
-    public name: string,
-    public description: string,
-    public unitPrice: number,
-    public imageUrl: string,
-    public active: boolean,
-    public unitsInStock: number,
-    public dateCreated: Date,
-    public lastUpdate: Date
-  ) {}
+  public id: number = 1;
+  public sku: string = '';
+  public name: string = 'product';
+  public description: string = 'unknown';
+  public unitPrice: number = 99;
+  public imageUrl: string = 'unknown';
+  public active: boolean = true;
+  public unitsInStock: number = 0;
+  public dateCreated: Date = new Date();
+  public lastUpdate: Date = new Date();
+
+  constructor() {}
 }
