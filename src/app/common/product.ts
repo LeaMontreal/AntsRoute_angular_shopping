@@ -1,5 +1,5 @@
 export class Product {
-  public id: number = 1;
+  public id: string = '1';
   public sku: string = '';
   public name: string = 'product';
   public description: string = 'unknown';
