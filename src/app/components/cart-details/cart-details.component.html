@@ -77,6 +77,9 @@
               <p>Total Quantity: {{ totalQuantity }}</p>
               <p>Shipping: FREE</p>
               <p>Total Price: {{ totalPrice | currency : "CAD" }}</p>
+              <div class="col">
+                <a routerLink="/checkout" class="btn btn-primary">Checkout</a>
+              </div>
             </td>
           </tr>
         </table>
