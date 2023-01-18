@@ -91,10 +91,13 @@
         <!-- Add check box to copy shipping to billing -->
         <div class="input-space">
           <label class="au-checkbox">
-            <input type="checkbox" 
-            (change)="copyShippingAddressToBillingAddress($event)">
+            <input
+              type="checkbox"
+              (change)="copyShippingAddressToBillingAddress($event)"
+            />
             <span class="au-checkmark"></span>
-            Billing Address same as Shipping Address</label>
+            Billing Address same as Shipping Address</label
+          >
         </div>
 
         <!-- Billing Address -->
@@ -199,7 +202,9 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="expirationMonth">
-                  <option>TO DO</option>
+                  <option *ngFor="let month of creditCardMonths">
+                    {{ month }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -210,7 +215,9 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="expirationYear">
-                  <option>TO DO</option>
+                  <option *ngFor="let year of creditCardYears">
+                    {{ year }}
+                  </option>
                 </select>
               </div>
             </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AntsRouteFormServiceService } from 'src/app/services/ants-route-form-service.service';
 
 @Component({
   selector: 'app-checkout',
@@ -16,7 +17,13 @@ export class CheckoutComponent implements OnInit {
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
-  constructor(private formBuilder: FormBuilder) {}
+  creditCardYears: number[] = [];
+  creditCardMonths: number[] = [];
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private antsRouteFormService: AntsRouteFormServiceService
+  ) {}
 
   ngOnInit(): void {
     this.checkoutFormGroup = this.formBuilder.group({
@@ -48,12 +55,34 @@ export class CheckoutComponent implements OnInit {
         expirationYear: [''],
       }),
     });
+
+    // populate credit card months
+    const currentMonth: number = new Date().getMonth();
+    console.log("startMonth: " + (currentMonth+1));
+
+    this.antsRouteFormService.getCreditCardMonths(currentMonth + 1).subscribe(
+      data=>{
+        console.log("Retrieved credit card months: " + JSON.stringify(data));
+        this.creditCardMonths = data;
+      }
+    );
+
+    // populate credit card years
+    this.antsRouteFormService.getCreditCardYears().subscribe(
+      data=>{
+        console.log("Retrieved credit card years: " + JSON.stringify(data));
+        this.creditCardYears = data;
+      }
+    );
+
   }
 
-  copyShippingAddressToBillingAddress(event){
-    if(event.target.checked){
-      this.checkoutFormGroup.controls.billingAddress.setValue(this.checkoutFormGroup.controls.shippingAddress.value);
-    }else{
+  copyShippingAddressToBillingAddress(event) {
+    if (event.target.checked) {
+      this.checkoutFormGroup.controls.billingAddress.setValue(
+        this.checkoutFormGroup.controls.shippingAddress.value
+      );
+    } else {
       this.checkoutFormGroup.controls.billingAddress.reset();
     }
   }
