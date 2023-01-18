@@ -58,23 +58,24 @@ export class CheckoutComponent implements OnInit {
 
     // populate credit card months
     const currentMonth: number = new Date().getMonth();
-    console.log("startMonth: " + (currentMonth+1));
+    console.log('startMonth: ' + (currentMonth + 1));
 
-    this.antsRouteFormService.getCreditCardMonths(currentMonth + 1).subscribe(
-      data=>{
-        console.log("Retrieved credit card months: " + JSON.stringify(data));
+    this.antsRouteFormService
+      .getCreditCardMonths(currentMonth + 1)
+      .subscribe((data) => {
+        console.log(
+          'ngOnInit() Retrieved credit card months: ' + JSON.stringify(data)
+        );
         this.creditCardMonths = data;
-      }
-    );
+      });
 
     // populate credit card years
-    this.antsRouteFormService.getCreditCardYears().subscribe(
-      data=>{
-        console.log("Retrieved credit card years: " + JSON.stringify(data));
-        this.creditCardYears = data;
-      }
-    );
-
+    this.antsRouteFormService.getCreditCardYears().subscribe((data) => {
+      console.log(
+        'ngOnInit() Retrieved credit card years: ' + JSON.stringify(data)
+      );
+      this.creditCardYears = data;
+    });
   }
 
   copyShippingAddressToBillingAddress(event) {
@@ -94,5 +95,31 @@ export class CheckoutComponent implements OnInit {
       'The email address is ' +
         this.checkoutFormGroup!.get('customer')?.value.email
     );
+  }
+
+  // when user change the selected year, retrieve the month list again
+  handleMonthsAndYears() {
+    const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
+
+    const currentYear: number = new Date().getFullYear();
+    const selectedYear: number = Number(
+      creditCardFormGroup!.value.expirationYear
+    );
+
+    // if the current year equals the selected year, then start with the current month
+    let startMonth: number;
+
+    if (currentYear === selectedYear) {
+      startMonth = new Date().getMonth() + 1;
+    } else {
+      startMonth = 1;
+    }
+
+    this.antsRouteFormService
+      .getCreditCardMonths(startMonth)
+      .subscribe((data) => {
+        console.log('Retrieved credit card months: ' + JSON.stringify(data));
+        this.creditCardMonths = data;
+      });
   }
 }
