@@ -42,10 +42,18 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
-        firstName: ['', [Validators.required, Validators.minLength(2)]],
+        firstName: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(2),
+            AntsRouteValidators.notOnlyWhitespace,
+          ],
+        ],
         lastName: new FormControl('', [
           Validators.required,
           Validators.minLength(2),
+          AntsRouteValidators.notOnlyWhitespace,
         ]),
 
         email: new FormControl('', [
