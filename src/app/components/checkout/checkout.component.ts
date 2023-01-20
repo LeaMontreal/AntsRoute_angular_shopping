@@ -8,6 +8,7 @@ import {
 import { Country } from 'src/app/common/country';
 import { State } from 'src/app/common/state';
 import { AntsRouteFormServiceService } from 'src/app/services/ants-route-form-service.service';
+import { CartService } from 'src/app/services/cart.service';
 import { AntsRouteValidators } from 'src/app/validators/ants-route-validators';
 
 @Component({
@@ -36,10 +37,13 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private antsRouteFormService: AntsRouteFormServiceService
+    private antsRouteFormService: AntsRouteFormServiceService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
+    this.reviewCartDetails();
+
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: [
@@ -146,6 +150,18 @@ export class CheckoutComponent implements OnInit {
       console.log('ngOnInit() Retrieved countries: ' + JSON.stringify(data));
       this.countries = data;
     });
+  }
+
+  reviewCartDetails() {
+    // subscribe to cartService.totalQuantity
+    this.cartService.totalQuantity.subscribe(
+      (totalQuantity) => (this.totalQuantity = totalQuantity)
+    );
+
+    // subscribe to cartService.totalPrice
+    this.cartService.totalPrice.subscribe(
+      (totalPrice) => (this.totalPrice = totalPrice)
+    );
   }
 
   get firstName() {
