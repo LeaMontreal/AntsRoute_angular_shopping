@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 import {
+  OktaAuthGuard,
   OktaAuthModule,
   OktaCallbackComponent,
   OKTA_CONFIG,
@@ -26,6 +27,7 @@ import {
 import { OktaAuth } from '@okta/okta-auth-js';
 import myAppConfig from './config/my-app-config';
 import { ProductService } from './services/product.service';
+import { MembersPageComponent } from './components/members-page/members-page.component';
 
 const oktaConfig = Object.assign(
   {
@@ -44,6 +46,11 @@ const oktaAuth = new OktaAuth(oktaConfig);
 // when path matches, create new instance of component
 // attention: path order matters, first match wins.
 const routes: Routes = [
+  {
+    path: 'members', component: MembersPageComponent,
+    canActivate: [OktaAuthGuard],
+  },
+
   // Once the user is authenticated, they are redirected to our app
   // Normally we would need to parse the response and store the OAuth+OIDC tokens
   // The OktaCallbackComponent does this for us :)
@@ -73,6 +80,7 @@ const routes: Routes = [
     CheckoutComponent,
     LoginComponent,
     LoginStatusComponent,
+    MembersPageComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
