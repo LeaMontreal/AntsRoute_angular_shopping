@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ants-route": {
+    "ants-route-v0.1": {
       "projectType": "application",
       "schematics": {},
       "root": "",

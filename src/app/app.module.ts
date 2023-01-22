@@ -29,7 +29,7 @@ import { ProductService } from './services/product.service';
 
 const oktaConfig = Object.assign(
   {
-    onAuthRequired: (injector) => {
+    onAuthRequired: (injector: any) => {
       const router = injector.get(Router);
 
       // Redirect the user to your custom login page
