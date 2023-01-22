@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ants-route-v0.1": {
+    "ants-route": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,6 +13,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "@babel/runtime-corejs3",
+              "cross-fetch",
+              "p-cancelable",
+              "tiny-emitter",
+              "detect-node",
+              "@okta/okta-signin-widget"
+            ],
+
             "outputPath": "dist/ants-route-v0.1",
             "index": "src/index.html",
             "main": "src/main.ts",
