@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { OktaAuthStateService, OKTA_AUTH } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
-import { OktaSignIn } from '@okta/okta-signin-widget';
+//import { OktaSignIn } from '@okta/okta-signin-widget';
+import * as OktaSignIn from '@okta/okta-signin-widget';
 import myAppConfig from 'src/app/config/my-app-config';
 
 @Component({
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
     // if there's some rendering before, remove them
     this.oktaSignin.remove();
 
-    this.oktaSignin.renderEl({ el: '#okta-sign-in-widget' }), // this name should be same as div tag id in login.component.html
+    this.oktaSignin.renderEl({ el: '#okta-sign-in-widget' }, // this name should be same as div tag id in login.component.html
       (response: any) => {
         if (response.status === 'SUCCESS') {
           this.oktaAuth.signInWithRedirect();
@@ -46,6 +47,7 @@ export class LoginComponent implements OnInit {
       },
       (error: any) => {
         throw error;
-      };
+      }
+    );
   }
 }
