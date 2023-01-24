@@ -28,6 +28,7 @@ import { OktaAuth } from '@okta/okta-auth-js';
 import myAppConfig from './config/my-app-config';
 import { ProductService } from './services/product.service';
 import { MembersPageComponent } from './components/members-page/members-page.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
 
 const oktaConfig = Object.assign(
   {
@@ -46,6 +47,11 @@ const oktaAuth = new OktaAuth(oktaConfig);
 // when path matches, create new instance of component
 // attention: path order matters, first match wins.
 const routes: Routes = [
+  {
+    path: 'order-history', component: OrderHistoryComponent,
+    canActivate: [OktaAuthGuard],
+  },
+
   {
     path: 'members', component: MembersPageComponent,
     canActivate: [OktaAuthGuard],
@@ -81,6 +87,7 @@ const routes: Routes = [
     LoginComponent,
     LoginStatusComponent,
     MembersPageComponent,
+    OrderHistoryComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
