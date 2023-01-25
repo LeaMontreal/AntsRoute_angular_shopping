@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  // add your custom environment configs
+  // define any name:value pairs
+  ecommerceApiUrl: "https://localhost:8443/api/v1"
 };
 
 /*

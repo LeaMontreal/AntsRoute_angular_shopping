@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../common/product';
 import { map } from 'rxjs/operators'; // manually added
 import { ProductCategory } from '../common/product-category';
+import { environment } from 'src/environments/environment';
 
 // inject service into other components
 // 'root' means gloablly, other components can use it anywhere
@@ -11,8 +12,8 @@ import { ProductCategory } from '../common/product-category';
   providedIn: 'root',
 })
 export class ProductService {
-  private baseUrl = 'http://localhost:8080/api/v1/products';
-  private categoryUrl = 'http://localhost:8080/api/v1/product-category';
+  private baseUrl = environment.ecommerceApiUrl + '/products';
+  private categoryUrl = environment.ecommerceApiUrl + '/product-category';
 
   constructor(private httpClient: HttpClient) {}
 
