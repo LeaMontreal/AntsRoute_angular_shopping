@@ -7,7 +7,8 @@ export const environment = {
 
   // add your custom environment configs
   // define any name:value pairs
-  ecommerceApiUrl: "https://localhost:8443/api/v1"
+  ecommerceApiUrl: "https://localhost:8443/api/v1",
+  stripePublishableKey: "pk_test_51MUWRkGZOyLNVjLVIJCf5buo7nhKTYFTeK6mCMf1VMwTIjU2DN6EGCnmQYxTc2oJ5f44X6Y48CAzPdTLLmEPiCsF00s2teiP5g"
 };
 
 /*
